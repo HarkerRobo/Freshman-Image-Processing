@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,6 @@ public class WebCamViewer extends JPanel
     
     private Webcam cam;
     private List<ImageListener> listeners;
-    private boolean shouldUpdate;
     private BufferedImage nextImage;
     
     /**
@@ -40,7 +40,6 @@ public class WebCamViewer extends JPanel
         setBounds(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
         cam = UtilWebcamCapture.openDefault(CAMERA_WIDTH, CAMERA_HEIGHT);
         listeners = new ArrayList<ImageListener>();
-        shouldUpdate = false;
         nextImage = null;
     }
     
@@ -54,7 +53,6 @@ public class WebCamViewer extends JPanel
                 l.ImageRecieved(bi);
             }
             nextImage = bi;
-            shouldUpdate = true;
             repaint();
         }
     }
@@ -66,12 +64,8 @@ public class WebCamViewer extends JPanel
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        if(shouldUpdate){
-            g.drawImage(nextImage, 0, 0, null);
-            shouldUpdate = false;
+        if(nextImage != null){
+            g.drawImage(nextImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT), 0, 0, null);
         }
     }
-    
-    
-
 }
