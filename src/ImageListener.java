@@ -1,10 +1,6 @@
 import java.awt.image.BufferedImage;
 
 /**
- * 
- */
-
-/**
  * @author joelmanning
  *
  */
