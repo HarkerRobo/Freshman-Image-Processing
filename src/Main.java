@@ -20,7 +20,7 @@ public class Main
     {
         window = new JFrame("Webcam Processor");
         view = new WebCamViewer();
-        sf = new ShapeFinder(new FalseCriteria());
+        sf = new ShapeFinder(new RetroReflectiveCriteria());
         view.addImageListener(sf);
         window.add(view);
         window.setSize(WebCamViewer.CAMERA_WIDTH, WebCamViewer.CAMERA_HEIGHT);
